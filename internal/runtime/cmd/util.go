@@ -42,6 +42,11 @@ func handleResponseError(err error) error {
 	return err
 }
 
+func handleResponseNoInfoError(t resources.ResourceType, name string) {
+	fmt.Fprintln(os.Stderr, fmt.Sprintf("the %s with name %s is not avaiable", t.String(), name))
+	os.Exit(1)
+}
+
 func printGetOutput(r interface{}) {
 	if r == nil {
 		return

@@ -12,195 +12,195 @@ import (
 type Auth struct {
 
   // The attributes for API Key Authentication.
-  Apikey []*AuthAttribute `json:"apikey,omitempty"`
+  Apikey []*AuthAttribute `json:"apikey,,omitempty"`
 
   // The attributes for [AWS Auth](http://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
-  Awsv4 []*AuthAttribute `json:"awsv4,omitempty"`
+  Awsv4 []*AuthAttribute `json:"awsv4,,omitempty"`
 
   // The attributes for [Basic Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication).
-  Basic []*AuthAttribute `json:"basic,omitempty"`
+  Basic []*AuthAttribute `json:"basic,,omitempty"`
 
   // The helper attributes for [Bearer Token Authentication](https://tools.ietf.org/html/rfc6750)
-  Bearer []*AuthAttribute `json:"bearer,omitempty"`
+  Bearer []*AuthAttribute `json:"bearer,,omitempty"`
 
   // The attributes for [Digest Authentication](https://en.wikipedia.org/wiki/Digest_access_authentication).
-  Digest []*AuthAttribute `json:"digest,omitempty"`
+  Digest []*AuthAttribute `json:"digest,,omitempty"`
 
   // The attributes for [Hawk Authentication](https://github.com/hueniverse/hawk)
-  Hawk []*AuthAttribute `json:"hawk,omitempty"`
-  Noauth interface{} `json:"noauth,omitempty"`
+  Hawk []*AuthAttribute `json:"hawk,,omitempty"`
+  Noauth interface{} `json:"noauth,,omitempty"`
 
   // The attributes for [NTLM Authentication](https://msdn.microsoft.com/en-us/library/cc237488.aspx)
-  Ntlm []*AuthAttribute `json:"ntlm,omitempty"`
+  Ntlm []*AuthAttribute `json:"ntlm,,omitempty"`
 
   // The attributes for [OAuth2](https://oauth.net/1/)
-  Oauth1 []*AuthAttribute `json:"oauth1,omitempty"`
+  Oauth1 []*AuthAttribute `json:"oauth1,,omitempty"`
 
   // Helper attributes for [OAuth2](https://oauth.net/2/)
-  Oauth2 []*AuthAttribute `json:"oauth2,omitempty"`
-  Type string `json:"type"`
+  Oauth2 []*AuthAttribute `json:"oauth2,,omitempty"`
+  Type string `json:"type,omitempty"`
 }
 
 // AuthAttribute Represents an attribute for any authorization method provided by Postman. For example `username` and `password` are set as auth attributes for Basic Authentication method.
 type AuthAttribute struct {
-  Key string `json:"key"`
-  Type string `json:"type,omitempty"`
-  Value interface{} `json:"value,omitempty"`
+  Key string `json:"key,omitempty"`
+  Type string `json:"type,,omitempty"`
+  Value interface{} `json:"value,,omitempty"`
 }
 
 // Cert An object containing path to file certificate, on the file system
 type Cert struct {
 
   // The path to file containing key for certificate, on the file system
-  Src interface{} `json:"src,omitempty"`
+  Src interface{} `json:"src,,omitempty"`
 }
 
 // Certificate A representation of an ssl certificate
 type Certificate struct {
 
   // An object containing path to file certificate, on the file system
-  Cert *Cert `json:"cert,omitempty"`
+  Cert *Cert `json:"cert,,omitempty"`
 
   // An object containing path to file containing private key, on the file system
-  Key *Key `json:"key,omitempty"`
+  Key *Key `json:"key,,omitempty"`
 
   // A list of Url match pattern strings, to identify Urls this certificate can be used for.
-  Matches []interface{} `json:"matches,omitempty"`
+  Matches []interface{} `json:"matches,,omitempty"`
 
   // A name for the certificate for user reference
-  Name string `json:"name,omitempty"`
+  Name string `json:"name,,omitempty"`
 
   // The passphrase for the certificate
-  Passphrase string `json:"passphrase,omitempty"`
+  Passphrase string `json:"passphrase,,omitempty"`
 }
 
 // Collection 
 type Collection struct {
-  Auth interface{} `json:"auth,omitempty"`
-  Event []*Event `json:"event,omitempty"`
-  Info *Info `json:"info"`
+  Auth interface{} `json:"auth,,omitempty"`
+  Event []*Event `json:"event,,omitempty"`
+  Info *Info `json:"info,omitempty"`
 
   // Items are the basic unit for a Postman collection. You can think of them as corresponding to a single API endpoint. Each Item has one request and may have multiple API responses associated with it.
-  Item []interface{} `json:"item"`
-  ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,omitempty"`
-  Variable []*Variable `json:"variable,omitempty"`
+  Item []interface{} `json:"item,omitempty"`
+  ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,,omitempty"`
+  Variable []*Variable `json:"variable,,omitempty"`
 }
 
 // Cookie A Cookie, that follows the [Google Chrome format](https://developer.chrome.com/extensions/cookies)
 type Cookie struct {
 
   // The domain for which this cookie is valid.
-  Domain string `json:"domain"`
+  Domain string `json:"domain,omitempty"`
 
   // When the cookie expires.
-  Expires interface{} `json:"expires,omitempty"`
+  Expires interface{} `json:"expires,,omitempty"`
 
   // Custom attributes for a cookie go here, such as the [Priority Field](https://code.google.com/p/chromium/issues/detail?id=232693)
-  Extensions []interface{} `json:"extensions,omitempty"`
+  Extensions []interface{} `json:"extensions,,omitempty"`
 
   // True if the cookie is a host-only cookie. (i.e. a request's URL domain must exactly match the domain of the cookie).
-  HostOnly bool `json:"hostOnly,omitempty"`
+  HostOnly bool `json:"hostOnly,,omitempty"`
 
   // Indicates if this cookie is HTTP Only. (if True, the cookie is inaccessible to client-side scripts)
-  HttpOnly bool `json:"httpOnly,omitempty"`
-  MaxAge string `json:"maxAge,omitempty"`
+  HttpOnly bool `json:"httpOnly,,omitempty"`
+  MaxAge string `json:"maxAge,,omitempty"`
 
   // This is the name of the Cookie.
-  Name string `json:"name,omitempty"`
+  Name string `json:"name,,omitempty"`
 
   // The path associated with the Cookie.
-  Path string `json:"path"`
+  Path string `json:"path,omitempty"`
 
   // Indicates if the 'secure' flag is set on the Cookie, meaning that it is transmitted over secure connections only. (typically HTTPS)
-  Secure bool `json:"secure,omitempty"`
+  Secure bool `json:"secure,,omitempty"`
 
   // True if the cookie is a session cookie.
-  Session bool `json:"session,omitempty"`
+  Session bool `json:"session,,omitempty"`
 
   // The value of the Cookie.
-  Value string `json:"value,omitempty"`
+  Value string `json:"value,,omitempty"`
 }
 
 // Event Defines a script associated with an associated event name
 type Event struct {
 
   // Indicates whether the event is disabled. If absent, the event is assumed to be enabled.
-  Disabled bool `json:"disabled,omitempty"`
+  Disabled bool `json:"disabled,,omitempty"`
 
   // A unique identifier for the enclosing event.
-  ID string `json:"id,omitempty"`
+  ID string `json:"id,,omitempty"`
 
   // Can be set to `test` or `prerequest` for test scripts or pre-request scripts respectively.
-  Listen string `json:"listen"`
-  Script *Script `json:"script,omitempty"`
+  Listen string `json:"listen,omitempty"`
+  Script *Script `json:"script,,omitempty"`
 }
 
 // Header Represents a single HTTP Header
 type Header struct {
-  Description interface{} `json:"description,omitempty"`
+  Description interface{} `json:"description,,omitempty"`
 
   // If set to true, the current header will not be sent with requests.
-  Disabled bool `json:"disabled,omitempty"`
+  Disabled bool `json:"disabled,,omitempty"`
 
   // This holds the LHS of the HTTP Header, e.g ``Content-Type`` or ``X-Custom-Header``
-  Key string `json:"key"`
+  Key string `json:"key,omitempty"`
 
   // The value (or the RHS) of the Header is stored in this field.
-  Value string `json:"value"`
+  Value string `json:"value,omitempty"`
 }
 
 // Info Detailed description of the info block
 type Info struct {
-  Description interface{} `json:"description,omitempty"`
+  Description interface{} `json:"description,,omitempty"`
 
   // A collection's friendly name is defined by this field. You would want to set this field to a value that would allow you to easily identify this collection among a bunch of other collections, as such outlining its usage or content.
-  Name string `json:"name"`
+  Name string `json:"name,omitempty"`
 
   // Every collection is identified by the unique value of this field. The value of this field is usually easiest to generate using a UID generator function. If you already have a collection, it is recommended that you maintain the same id since changing the id usually implies that is a different collection than it was originally.
   //  *Note: This field exists for compatibility reasons with Collection Format V1.*
-  PostmanID string `json:"_postman_id,omitempty"`
+  PostmanID string `json:"_postman_id,,omitempty"`
 
   // This should ideally hold a link to the Postman schema that is used to validate this collection. E.g: https://schema.getpostman.com/collection/v1
-  Schema string `json:"schema"`
-  Version interface{} `json:"version,omitempty"`
+  Schema string `json:"schema,omitempty"`
+  Version interface{} `json:"version,,omitempty"`
 }
 
 // Item Items are entities which contain an actual HTTP request, and sample responses attached to it.
 type Item struct {
-  Description interface{} `json:"description,omitempty"`
-  Event []*Event `json:"event,omitempty"`
+  Description interface{} `json:"description,,omitempty"`
+  Event []*Event `json:"event,,omitempty"`
 
   // A unique ID that is used to identify collections internally
-  ID string `json:"id,omitempty"`
+  ID string `json:"id,,omitempty"`
 
   // A human readable identifier for the current item.
-  Name string `json:"name,omitempty"`
-  ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,omitempty"`
-  Request interface{} `json:"request"`
-  Response []*Response `json:"response,omitempty"`
-  Variable []*Variable `json:"variable,omitempty"`
+  Name string `json:"name,,omitempty"`
+  ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,,omitempty"`
+  Request interface{} `json:"request,omitempty"`
+  Response []*Response `json:"response,,omitempty"`
+  Variable []*Variable `json:"variable,,omitempty"`
 }
 
 // ItemGroup One of the primary goals of Postman is to organize the development of APIs. To this end, it is necessary to be able to group requests together. This can be achived using 'Folders'. A folder just is an ordered set of requests.
 type ItemGroup struct {
-  Auth interface{} `json:"auth,omitempty"`
-  Description interface{} `json:"description,omitempty"`
-  Event []*Event `json:"event,omitempty"`
+  Auth interface{} `json:"auth,,omitempty"`
+  Description interface{} `json:"description,,omitempty"`
+  Event []*Event `json:"event,,omitempty"`
 
   // Items are entities which contain an actual HTTP request, and sample responses attached to it. Folders may contain many items.
-  Item []interface{} `json:"item"`
+  Item []interface{} `json:"item,omitempty"`
 
   // A folder's friendly name is defined by this field. You would want to set this field to a value that would allow you to easily identify this folder.
-  Name string `json:"name,omitempty"`
-  ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,omitempty"`
-  Variable []*Variable `json:"variable,omitempty"`
+  Name string `json:"name,,omitempty"`
+  ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,,omitempty"`
+  Variable []*Variable `json:"variable,,omitempty"`
 }
 
 // Key An object containing path to file containing private key, on the file system
 type Key struct {
 
   // The path to file containing key for certificate, on the file system
-  Src interface{} `json:"src,omitempty"`
+  Src interface{} `json:"src,,omitempty"`
 }
 
 // ProtocolProfileBehavior Set of configurations used to alter the usual behavior of sending the request
@@ -211,83 +211,83 @@ type ProtocolProfileBehavior struct {
 type ProxyConfig struct {
 
   // When set to true, ignores this proxy configuration entity
-  Disabled bool `json:"disabled,omitempty"`
+  Disabled bool `json:"disabled,,omitempty"`
 
   // The proxy server host
-  Host string `json:"host,omitempty"`
+  Host string `json:"host,,omitempty"`
 
   // The Url match for which the proxy config is defined
-  Match string `json:"match,omitempty"`
+  Match string `json:"match,,omitempty"`
 
   // The proxy server port
-  Port int `json:"port,omitempty"`
+  Port int `json:"port,,omitempty"`
 
   // The tunneling details for the proxy config
-  Tunnel bool `json:"tunnel,omitempty"`
+  Tunnel bool `json:"tunnel,,omitempty"`
 }
 
 // Response A response represents an HTTP response.
 type Response struct {
 
   // The raw text of the response.
-  Body interface{} `json:"body,omitempty"`
+  Body interface{} `json:"body,,omitempty"`
 
   // The numerical response code, example: 200, 201, 404, etc.
-  Code int `json:"code,omitempty"`
-  Cookie []*Cookie `json:"cookie,omitempty"`
-  Header interface{} `json:"header,omitempty"`
+  Code int `json:"code,,omitempty"`
+  Cookie []*Cookie `json:"cookie,,omitempty"`
+  Header interface{} `json:"header,,omitempty"`
 
   // A unique, user defined identifier that can  be used to refer to this response from requests.
-  ID string `json:"id,omitempty"`
-  OriginalRequest interface{} `json:"originalRequest,omitempty"`
+  ID string `json:"id,,omitempty"`
+  OriginalRequest interface{} `json:"originalRequest,,omitempty"`
 
   // The time taken by the request to complete. If a number, the unit is milliseconds. If the response is manually created, this can be set to `null`.
-  ResponseTime interface{} `json:"responseTime,omitempty"`
+  ResponseTime interface{} `json:"responseTime,,omitempty"`
 
   // The response status, e.g: '200 OK'
-  Status string `json:"status,omitempty"`
+  Status string `json:"status,,omitempty"`
 
   // Set of timing information related to request and response in milliseconds
-  Timings interface{} `json:"timings,omitempty"`
+  Timings interface{} `json:"timings,,omitempty"`
 }
 
 // Script A script is a snippet of Javascript code that can be used to to perform setup or teardown operations on a particular response.
 type Script struct {
-  Exec interface{} `json:"exec,omitempty"`
+  Exec interface{} `json:"exec,,omitempty"`
 
   // A unique, user defined identifier that can  be used to refer to this script from requests.
-  ID string `json:"id,omitempty"`
+  ID string `json:"id,,omitempty"`
 
   // Script name
-  Name string `json:"name,omitempty"`
-  Src interface{} `json:"src,omitempty"`
+  Name string `json:"name,,omitempty"`
+  Src interface{} `json:"src,,omitempty"`
 
   // Type of the script. E.g: 'text/javascript'
-  Type string `json:"type,omitempty"`
+  Type string `json:"type,,omitempty"`
 }
 
 // Variable Using variables in your Postman requests eliminates the need to duplicate requests, which can save a lot of time. Variables can be defined, and referenced to from any part of a request.
 type Variable struct {
-  Description interface{} `json:"description,omitempty"`
-  Disabled bool `json:"disabled,omitempty"`
+  Description interface{} `json:"description,,omitempty"`
+  Disabled bool `json:"disabled,,omitempty"`
 
   // A variable ID is a unique user-defined value that identifies the variable within a collection. In traditional terms, this would be a variable name.
-  ID string `json:"id,omitempty"`
+  ID string `json:"id,,omitempty"`
 
   // A variable key is a human friendly value that identifies the variable within a collection. In traditional terms, this would be a variable name.
-  Key string `json:"key,omitempty"`
+  Key string `json:"key,,omitempty"`
 
   // Variable name
-  Name string `json:"name,omitempty"`
+  Name string `json:"name,,omitempty"`
 
   // When set to true, indicates that this variable has been set by Postman
-  System bool `json:"system,omitempty"`
+  System bool `json:"system,,omitempty"`
 
   // A variable may have multiple types. This field specifies the type of the variable.
-  Type string `json:"type,omitempty"`
+  Type string `json:"type,,omitempty"`
 
   // The value that a variable holds in this collection. Ultimately, the variables will be replaced by this value, when say running a set of requests from a collection
-  Value interface{} `json:"value,omitempty"`
+  Value interface{} `json:"value,,omitempty"`
 }
 
 func (strct *Auth) MarshalJSON() ([]byte, error) {

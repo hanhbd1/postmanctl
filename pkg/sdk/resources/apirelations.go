@@ -116,49 +116,49 @@ func (r FormattedAPIRelationItems) Format() ([]string, []interface{}) {
 
 // APIRelationsResource provides the top-level wrapper for API Relations.
 type APIRelationsResource struct {
-	Relations APIRelations `json:"relations"`
+	Relations APIRelations `json:"relations,omitempty"`
 }
 
 // APIRelations provides the top-level relations representation for APIs.
 type APIRelations struct {
-	Documentation   map[string]LinkedCollection  `json:"documentation,omitempty"`
-	Environment     map[string]LinkedEnvironment `json:"environment,omitempty"`
-	ContractTest    map[string]LinkedCollection  `json:"contracttest,omitempty"`
-	TestSuite       map[string]LinkedCollection  `json:"testsuite,omitempty"`
-	IntegrationTest map[string]LinkedCollection  `json:"integrationtest,omitempty"`
-	Mock            map[string]LinkedMock        `json:"mock,omitempty"`
-	Monitor         map[string]LinkedMonitor     `json:"monitor,omitempty"`
+	Documentation   map[string]LinkedCollection  `json:"documentation,,omitempty"`
+	Environment     map[string]LinkedEnvironment `json:"environment,,omitempty"`
+	ContractTest    map[string]LinkedCollection  `json:"contracttest,,omitempty"`
+	TestSuite       map[string]LinkedCollection  `json:"testsuite,,omitempty"`
+	IntegrationTest map[string]LinkedCollection  `json:"integrationtest,,omitempty"`
+	Mock            map[string]LinkedMock        `json:"mock,,omitempty"`
+	Monitor         map[string]LinkedMonitor     `json:"monitor,,omitempty"`
 }
 
 // LinkedCollection describes a single linked collection representation.
 type LinkedCollection struct {
-	ID        string    `json:"id"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+	ID        string    `json:"id,omitempty"`
+	Name      string    `json:"name,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }
 
 // LinkedEnvironment describes a single linked collection representation.
 type LinkedEnvironment struct {
-	ID        string    `json:"id"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+	ID        string    `json:"id,omitempty"`
+	Name      string    `json:"name,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }
 
 // LinkedMock describes a single linked collection representation.
 type LinkedMock struct {
-	ID        string    `json:"id"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
-	URL       string    `json:"url"`
+	ID        string    `json:"id,omitempty"`
+	Name      string    `json:"name,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
+	URL       string    `json:"url,omitempty"`
 }
 
 // LinkedMonitor describes a single linked collection representation.
 type LinkedMonitor struct {
-	ID        string    `json:"id"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+	ID        string    `json:"id,omitempty"`
+	Name      string    `json:"name,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 }

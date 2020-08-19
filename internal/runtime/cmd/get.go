@@ -18,8 +18,10 @@ package cmd
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/spf13/cast"
 	"os"
 	"strings"
 
@@ -163,6 +165,46 @@ func generateGetSubcommand(t resources.ResourceType, use string, aliases []strin
 	}
 }
 
+func prepareMap(resourceType resources.ResourceType, args ...string) map[string]string {
+	ctx := context.Background()
+	uuidmap := make(map[string]string)
+	var resource interface{}
+	var err error
+
+	switch resourceType {
+	case resources.CollectionType:
+		resource, err = service.Collections(ctx)
+	case resources.EnvironmentType:
+		resource, err = service.Environments(ctx)
+	case resources.MockType:
+		resource, err = service.Mocks(ctx)
+	case resources.MonitorType:
+		resource, err = service.Monitors(ctx)
+	case resources.APIType:
+		resource, err = service.APIs(ctx, usingWorkspace)
+	case resources.APIVersionType:
+		resource, err = service.APIVersions(ctx, args[0])
+	case resources.WorkspaceType:
+		resource, err = service.Workspaces(ctx)
+	default:
+		return uuidmap
+	}
+
+	if err != nil {
+		return uuidmap
+	}
+	data, _ := json.Marshal(resource)
+	var tmp []map[string]interface{}
+	err = json.Unmarshal(data, &tmp)
+	if err != nil {
+		return uuidmap
+	}
+	for _, t := range tmp {
+		uuidmap[cast.ToString(t["name"])] = cast.ToString(t["uid"])
+	}
+	return uuidmap
+}
+
 func getAllResources(resourceType resources.ResourceType, args ...string) error {
 	ctx := context.Background()
 
@@ -199,7 +241,12 @@ func getAllResources(resourceType resources.ResourceType, args ...string) error 
 
 func getIndividualCollections(args []string) error {
 	r := make(resources.CollectionSlice, len(args))
-	for i, id := range args {
+	uuidmap := prepareMap(resources.CollectionType)
+	for i, name := range args {
+		id, ok := uuidmap[name]
+		if !ok {
+			handleResponseNoInfoError(resources.CollectionType, name)
+		}
 		resource, err := service.Collection(context.Background(), id)
 
 		if err != nil {

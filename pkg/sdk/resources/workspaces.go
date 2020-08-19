@@ -19,7 +19,7 @@ package resources
 // WorkspaceListResponse represents the top-level workspaces response from the
 // Postman API.
 type WorkspaceListResponse struct {
-	Workspaces WorkspaceListItems `json:"workspaces"`
+	Workspaces WorkspaceListItems `json:"workspaces,omitempty"`
 }
 
 // WorkspaceListItems is a slice of WorkspaceListItem.
@@ -37,28 +37,28 @@ func (r WorkspaceListItems) Format() ([]string, []interface{}) {
 
 // WorkspaceListItem represents a single item in an WorkspaceListResponse.
 type WorkspaceListItem struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-	Type string `json:"type"`
+	ID   string `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
+	Type string `json:"type,omitempty"`
 }
 
 // WorkspaceResponse is the top-level workspace response from the
 // Postman API.
 type WorkspaceResponse struct {
-	Workspace Workspace `json:"workspace"`
+	Workspace Workspace `json:"workspace,omitempty"`
 }
 
 // Workspace represents the single workspace response from the
 // Postman API
 type Workspace struct {
-	ID           string                         `json:"id"`
-	Name         string                         `json:"name"`
-	Type         string                         `json:"type"`
-	Description  string                         `json:"description"`
-	Collections  []WorkspaceCollectionListItem  `json:"collections"`
-	Environments []WorkspaceEnvironmentListItem `json:"environments"`
-	Mocks        []WorkspaceMockListItem        `json:"mocks"`
-	Monitors     []WorkspaceMonitorListItem     `json:"monitors"`
+	ID           string                         `json:"id,omitempty"`
+	Name         string                         `json:"name,omitempty"`
+	Type         string                         `json:"type,omitempty"`
+	Description  string                         `json:"description,omitempty"`
+	Collections  []WorkspaceCollectionListItem  `json:"collections,omitempty"`
+	Environments []WorkspaceEnvironmentListItem `json:"environments,omitempty"`
+	Mocks        []WorkspaceMockListItem        `json:"mocks,omitempty"`
+	Monitors     []WorkspaceMonitorListItem     `json:"monitors,omitempty"`
 }
 
 // Format returns column headers and values for the resource.
@@ -84,24 +84,24 @@ func (r WorkspaceSlice) Format() ([]string, []interface{}) {
 
 // WorkspaceCollectionListItem represents a single collection item in a Workspace.
 type WorkspaceCollectionListItem struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-	UID  string `json:"uid"`
+	ID   string `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
+	UID  string `json:"uid,omitempty"`
 }
 
 // WorkspaceEnvironmentListItem represents a single environment item in a Workspace.
 type WorkspaceEnvironmentListItem struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-	UID  string `json:"uid"`
+	ID   string `json:"id,omitempty"`
+	Name string `json:"name,omitempty"`
+	UID  string `json:"uid,omitempty"`
 }
 
 // WorkspaceMockListItem represents a single mock item in a Workspace.
 type WorkspaceMockListItem struct {
-	ID string `json:"id"`
+	ID string `json:"id,omitempty"`
 }
 
 // WorkspaceMonitorListItem represents a single monitor item in a Workspace.
 type WorkspaceMonitorListItem struct {
-	ID string `json:"id"`
+	ID string `json:"id,omitempty"`
 }

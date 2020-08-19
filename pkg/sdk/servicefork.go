@@ -28,7 +28,7 @@ func (s *Service) ForkCollection(ctx context.Context, id, workspace, label strin
 	queryParams["workspace"] = workspace
 
 	input := struct {
-		Label string `json:"label"`
+		Label string `json:"label,omitempty"`
 	}{
 		Label: label,
 	}
@@ -59,9 +59,9 @@ func (s *Service) MergeCollection(ctx context.Context, id, destination, strategy
 	responseValueKey := "collection"
 
 	input := struct {
-		Source      string `json:"source"`
-		Destination string `json:"destination"`
-		Strategy    string `json:"strategy"`
+		Source      string `json:"source,omitempty"`
+		Destination string `json:"destination,omitempty"`
+		Strategy    string `json:"strategy,omitempty"`
 	}{
 		Source:      id,
 		Destination: destination,
