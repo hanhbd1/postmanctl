@@ -24,13 +24,13 @@ import (
 // UserResponse represents the top-level struct of a user response in the
 // Postman API.
 type UserResponse struct {
-	User User `json:"user"`
+	User User `json:"user,omitempty"`
 }
 
 // User represents the user info associated with a user request in the
 // Postman API.
 type User struct {
-	ID string `json:"id"`
+	ID string `json:"id,omitempty"`
 }
 
 // UnmarshalJSON sets the receiver to a copy of data.

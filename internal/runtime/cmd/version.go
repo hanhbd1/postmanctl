@@ -32,9 +32,9 @@ var (
 )
 
 type versionInfo struct {
-	Version string `json:"version"`
-	Commit  string `json:"commit"`
-	Date    string `json:"date"`
+	Version string `json:"version,omitempty"`
+	Commit  string `json:"commit,omitempty"`
+	Date    string `json:"date,omitempty"`
 }
 
 var versionOutputFormat VersionOutputFormatValue

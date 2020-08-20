@@ -19,7 +19,7 @@ package resources
 // EnvironmentListResponse represents the top-level environments response from the
 // Postman API.
 type EnvironmentListResponse struct {
-	Environments EnvironmentListItems `json:"environments"`
+	Environments EnvironmentListItems `json:"environments,omitempty"`
 }
 
 // EnvironmentListItems is a slice of EnvironmentListItem.
@@ -37,24 +37,24 @@ func (r EnvironmentListItems) Format() ([]string, []interface{}) {
 
 // EnvironmentListItem represents a single item in an EnvironmentListResponse.
 type EnvironmentListItem struct {
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	Owner string `json:"owner"`
-	UID   string `json:"uid"`
+	ID    string `json:"id,omitempty"`
+	Name  string `json:"name,omitempty"`
+	Owner string `json:"owner,omitempty"`
+	UID   string `json:"uid,omitempty"`
 }
 
 // EnvironmentResponse is the top-level environment response from the
 // Postman API.
 type EnvironmentResponse struct {
-	Environment Environment `json:"environment"`
+	Environment Environment `json:"environment,omitempty"`
 }
 
 // Environment represents the single environment response from the
 // Postman API
 type Environment struct {
-	ID     string         `json:"id"`
-	Name   string         `json:"name"`
-	Values []KeyValuePair `json:"values"`
+	ID     string         `json:"id,omitempty"`
+	Name   string         `json:"name,omitempty"`
+	Values []KeyValuePair `json:"values,omitempty"`
 }
 
 // Format returns column headers and values for the resource.
@@ -80,7 +80,7 @@ func (r EnvironmentSlice) Format() ([]string, []interface{}) {
 
 // KeyValuePair represents a key and value in the Postman API.
 type KeyValuePair struct {
-	Key     string `json:"key"`
-	Value   string `json:"value"`
-	Enabled bool   `json:"enabled"`
+	Key     string `json:"key,omitempty"`
+	Value   string `json:"value,omitempty"`
+	Enabled bool   `json:"enabled,omitempty"`
 }

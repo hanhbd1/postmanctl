@@ -20,7 +20,7 @@ import "time"
 
 // APIVersionListResponse represents the top-level API Versions response from the Postman API.
 type APIVersionListResponse struct {
-	APIVersions APIVersionListItems `json:"versions"`
+	APIVersions APIVersionListItems `json:"versions,omitempty"`
 }
 
 // APIVersionListItems is a slice of APIVersionListItem
@@ -38,34 +38,34 @@ func (r APIVersionListItems) Format() ([]string, []interface{}) {
 
 // APIVersionListItem represents a single item in an APIVersionListResponse.
 type APIVersionListItem struct {
-	ID            string    `json:"id"`
-	Name          string    `json:"name"`
-	TransactionID string    `json:"transactionId"`
-	CreatedAt     time.Time `json:"createdAt"`
-	UpdatedAt     time.Time `json:"updatedAt"`
-	API           string    `json:"api"`
-	CreatedBy     string    `json:"createdBy"`
-	UpdatedBy     string    `json:"updatedBy"`
-	LastRevision  int64     `json:"lastRevision"`
+	ID            string    `json:"id,omitempty"`
+	Name          string    `json:"name,omitempty"`
+	TransactionID string    `json:"transactionId,omitempty"`
+	CreatedAt     time.Time `json:"createdAt,omitempty"`
+	UpdatedAt     time.Time `json:"updatedAt,omitempty"`
+	API           string    `json:"api,omitempty"`
+	CreatedBy     string    `json:"createdBy,omitempty"`
+	UpdatedBy     string    `json:"updatedBy,omitempty"`
+	LastRevision  int64     `json:"lastRevision,omitempty"`
 }
 
 // APIVersionResponse is a single APIVersion representation in the Postman APIVersion.
 type APIVersionResponse struct {
-	APIVersion APIVersion `json:"version"`
+	APIVersion APIVersion `json:"version,omitempty"`
 }
 
 // APIVersion represents a single item in an APIVersionListResponse.
 type APIVersion struct {
-	ID            string    `json:"id"`
-	Name          string    `json:"name"`
-	TransactionID string    `json:"transactionId"`
-	CreatedAt     time.Time `json:"createdAt"`
-	UpdatedAt     time.Time `json:"updatedAt"`
-	API           string    `json:"api"`
-	CreatedBy     string    `json:"createdBy"`
-	UpdatedBy     string    `json:"updatedBy"`
-	LastRevision  int64     `json:"lastRevision"`
-	Schema        []string  `json:"schema"`
+	ID            string    `json:"id,omitempty"`
+	Name          string    `json:"name,omitempty"`
+	TransactionID string    `json:"transactionId,omitempty"`
+	CreatedAt     time.Time `json:"createdAt,omitempty"`
+	UpdatedAt     time.Time `json:"updatedAt,omitempty"`
+	API           string    `json:"api,omitempty"`
+	CreatedBy     string    `json:"createdBy,omitempty"`
+	UpdatedBy     string    `json:"updatedBy,omitempty"`
+	LastRevision  int64     `json:"lastRevision,omitempty"`
+	Schema        []string  `json:"schema,omitempty"`
 }
 
 // Format returns column headers and values for the resource.

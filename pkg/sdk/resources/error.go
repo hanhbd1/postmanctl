@@ -22,14 +22,14 @@ import (
 
 // ErrorResponse is the struct representation of a Postman API error.
 type ErrorResponse struct {
-	Error Error `json:"error"`
+	Error Error `json:"error,omitempty"`
 }
 
 // Error is a struct representation of error details from a Postman API error.
 type Error struct {
-	Name    string                 `json:"name"`
-	Message string                 `json:"message"`
-	Details map[string]interface{} `json:"details"`
+	Name    string                 `json:"name,omitempty"`
+	Message string                 `json:"message,omitempty"`
+	Details map[string]interface{} `json:"details,omitempty"`
 }
 
 func (e *Error) String() string {

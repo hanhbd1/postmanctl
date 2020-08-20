@@ -38,12 +38,12 @@ type Auth struct {
 
   // Helper attributes for [OAuth2](https://oauth.net/2/)
   Oauth2 []*AuthAttribute `json:"oauth2,omitempty"`
-  Type string `json:"type"`
+  Type string `json:"type,omitempty"`
 }
 
 // AuthAttribute Represents an attribute for any authorization method provided by Postman. For example `username` and `password` are set as auth attributes for Basic Authentication method.
 type AuthAttribute struct {
-  Key string `json:"key"`
+  Key string `json:"key,omitempty"`
   Type string `json:"type,omitempty"`
   Value interface{} `json:"value,omitempty"`
 }
@@ -78,10 +78,10 @@ type Certificate struct {
 type Collection struct {
   Auth interface{} `json:"auth,omitempty"`
   Event []*Event `json:"event,omitempty"`
-  Info *Info `json:"info"`
+  Info *Info `json:"info,omitempty"`
 
   // Items are the basic unit for a Postman collection. You can think of them as corresponding to a single API endpoint. Each Item has one request and may have multiple API responses associated with it.
-  Item []interface{} `json:"item"`
+  Item []interface{} `json:"item,omitempty"`
   ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,omitempty"`
   Variable []*Variable `json:"variable,omitempty"`
 }
@@ -90,7 +90,7 @@ type Collection struct {
 type Cookie struct {
 
   // The domain for which this cookie is valid.
-  Domain string `json:"domain"`
+  Domain string `json:"domain,omitempty"`
 
   // When the cookie expires.
   Expires interface{} `json:"expires,omitempty"`
@@ -109,7 +109,7 @@ type Cookie struct {
   Name string `json:"name,omitempty"`
 
   // The path associated with the Cookie.
-  Path string `json:"path"`
+  Path string `json:"path,omitempty"`
 
   // Indicates if the 'secure' flag is set on the Cookie, meaning that it is transmitted over secure connections only. (typically HTTPS)
   Secure bool `json:"secure,omitempty"`
@@ -131,7 +131,7 @@ type Event struct {
   ID string `json:"id,omitempty"`
 
   // Can be set to `test` or `prerequest` for test scripts or pre-request scripts respectively.
-  Listen string `json:"listen"`
+  Listen string `json:"listen,omitempty"`
   Script *Script `json:"script,omitempty"`
 }
 
@@ -143,10 +143,10 @@ type Header struct {
   Disabled bool `json:"disabled,omitempty"`
 
   // This holds the LHS of the HTTP Header, e.g ``Content-Type`` or ``X-Custom-Header``
-  Key string `json:"key"`
+  Key string `json:"key,omitempty"`
 
   // The value (or the RHS) of the Header is stored in this field.
-  Value string `json:"value"`
+  Value string `json:"value,omitempty"`
 }
 
 // Info Detailed description of the info block
@@ -154,14 +154,14 @@ type Info struct {
   Description interface{} `json:"description,omitempty"`
 
   // A collection's friendly name is defined by this field. You would want to set this field to a value that would allow you to easily identify this collection among a bunch of other collections, as such outlining its usage or content.
-  Name string `json:"name"`
+  Name string `json:"name,omitempty"`
 
   // Every collection is identified by the unique value of this field. The value of this field is usually easiest to generate using a UID generator function. If you already have a collection, it is recommended that you maintain the same id since changing the id usually implies that is a different collection than it was originally.
   //  *Note: This field exists for compatibility reasons with Collection Format V1.*
   PostmanID string `json:"_postman_id,omitempty"`
 
   // This should ideally hold a link to the Postman schema that is used to validate this collection. E.g: https://schema.getpostman.com/collection/v1
-  Schema string `json:"schema"`
+  Schema string `json:"schema,omitempty"`
   Version interface{} `json:"version,omitempty"`
 }
 
@@ -176,7 +176,7 @@ type Item struct {
   // A human readable identifier for the current item.
   Name string `json:"name,omitempty"`
   ProtocolProfileBehavior *ProtocolProfileBehavior `json:"protocolProfileBehavior,omitempty"`
-  Request interface{} `json:"request"`
+  Request interface{} `json:"request,omitempty"`
   Response []*Response `json:"response,omitempty"`
   Variable []*Variable `json:"variable,omitempty"`
 }
@@ -188,7 +188,7 @@ type ItemGroup struct {
   Event []*Event `json:"event,omitempty"`
 
   // Items are entities which contain an actual HTTP request, and sample responses attached to it. Folders may contain many items.
-  Item []interface{} `json:"item"`
+  Item []interface{} `json:"item,omitempty"`
 
   // A folder's friendly name is defined by this field. You would want to set this field to a value that would allow you to easily identify this folder.
   Name string `json:"name,omitempty"`

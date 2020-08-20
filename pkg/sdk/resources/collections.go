@@ -23,7 +23,7 @@ import (
 	"github.com/kevinswiber/postmanctl/pkg/sdk/resources/gen"
 )
 
-//go:generate sh -c "schema-generate -p gen ../../../schema/collection.schema.json  | sed 's/Id/ID/g' > ./gen/collection.go"
+//// go:generate sh -c "schema-generate -p gen ../../../schema/collection.schema.json  | sed 's/Id/ID/g' > ./gen/collection.go"
 
 // Collection represents a Postman Collection.
 type Collection struct {
@@ -54,7 +54,7 @@ func (c *Collection) UnmarshalJSON(b []byte) error {
 // CollectionListResponse is the top-level struct representation of a collection
 // list response in the Postman API.
 type CollectionListResponse struct {
-	Collections CollectionListItems `json:"collections"`
+	Collections CollectionListItems `json:"collections,omitempty"`
 }
 
 // CollectionListItems is a slice of CollectionListItem
@@ -72,24 +72,24 @@ func (r CollectionListItems) Format() ([]string, []interface{}) {
 
 // CollectionListItem represents a single item in a CollectionListResponse.
 type CollectionListItem struct {
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	Owner string `json:"owner"`
-	UID   string `json:"uid"`
+	ID    string `json:"id,omitempty"`
+	Name  string `json:"name,omitempty"`
+	Owner string `json:"owner,omitempty"`
+	UID   string `json:"uid,omitempty"`
 	Fork  *Fork  `json:"fork,omitempty"`
 }
 
 // Fork represents fork metadata for a collection.
 type Fork struct {
-	Label     string    `json:"label"`
-	CreatedAt time.Time `json:"createdAt"`
-	From      string    `json:"from"`
+	Label     string    `json:"label,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	From      string    `json:"from,omitempty"`
 }
 
 // CollectionResponse is the top-level struct representation of a collection
 // response from the Postman API.
 type CollectionResponse struct {
-	Collection Collection `json:"collection"`
+	Collection Collection `json:"collection,omitempty"`
 }
 
 // Format returns column headers and values for the resource.

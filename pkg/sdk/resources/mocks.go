@@ -19,7 +19,7 @@ package resources
 // MockListResponse represents the top-level mocks response from the
 // Postman API.
 type MockListResponse struct {
-	Mocks MockListItems `json:"mocks"`
+	Mocks MockListItems `json:"mocks,omitempty"`
 }
 
 // MockListItems is a slice of MockListItem.
@@ -37,40 +37,40 @@ func (r MockListItems) Format() ([]string, []interface{}) {
 
 // MockListItem represents a mock in a list of all mocks.
 type MockListItem struct {
-	ID          string     `json:"id"`
-	Owner       string     `json:"owner"`
-	UID         string     `json:"uid"`
-	Collection  string     `json:"collection"`
-	MockURL     string     `json:"mockUrl"`
-	Name        string     `json:"name"`
-	Config      MockConfig `json:"config"`
-	Environment string     `json:"environment"`
+	ID          string     `json:"id,omitempty"`
+	Owner       string     `json:"owner,omitempty"`
+	UID         string     `json:"uid,omitempty"`
+	Collection  string     `json:"collection,omitempty"`
+	MockURL     string     `json:"mockUrl,omitempty"`
+	Name        string     `json:"name,omitempty"`
+	Config      MockConfig `json:"config,omitempty"`
+	Environment string     `json:"environment,omitempty"`
 }
 
 // MockResponse is the top-level mock response from the
 // Postman API.
 type MockResponse struct {
-	Mock Mock `json:"mock"`
+	Mock Mock `json:"mock,omitempty"`
 }
 
 // Mock represents a representation of a mock server from the Postman API.
 type Mock struct {
-	ID          string     `json:"id"`
-	Owner       string     `json:"owner"`
-	UID         string     `json:"uid"`
-	Collection  string     `json:"collection"`
-	MockURL     string     `json:"mockUrl"`
-	Name        string     `json:"name"`
-	Config      MockConfig `json:"config"`
-	Environment string     `json:"environment"`
+	ID          string     `json:"id,omitempty"`
+	Owner       string     `json:"owner,omitempty"`
+	UID         string     `json:"uid,omitempty"`
+	Collection  string     `json:"collection,omitempty"`
+	MockURL     string     `json:"mockUrl,omitempty"`
+	Name        string     `json:"name,omitempty"`
+	Config      MockConfig `json:"config,omitempty"`
+	Environment string     `json:"environment,omitempty"`
 }
 
 // MockConfig represents the configuration of a mock server.
 type MockConfig struct {
-	Headers          []interface{} `json:"headers"`
-	MatchBody        bool          `json:"matchBody"`
-	MatchQueryParams bool          `json:"matchQueryParams"`
-	MatchWildcards   bool          `json:"matchWildcards"`
+	Headers          []interface{} `json:"headers,omitempty"`
+	MatchBody        bool          `json:"matchBody,omitempty"`
+	MatchQueryParams bool          `json:"matchQueryParams,omitempty"`
+	MatchWildcards   bool          `json:"matchWildcards,omitempty"`
 }
 
 // Format returns column headers and values for the resource.
