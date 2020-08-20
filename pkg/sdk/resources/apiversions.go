@@ -38,7 +38,7 @@ func (r APIVersionListItems) Format() ([]string, []interface{}) {
 
 // APIVersionListItem represents a single item in an APIVersionListResponse.
 type APIVersionListItem struct {
-	ID            string    `json:"id,omitempty"`
+	ID            string    `json:"-,omitempty"`
 	Name          string    `json:"name,omitempty"`
 	TransactionID string    `json:"transactionId,omitempty"`
 	CreatedAt     time.Time `json:"createdAt,omitempty"`
@@ -56,7 +56,7 @@ type APIVersionResponse struct {
 
 // APIVersion represents a single item in an APIVersionListResponse.
 type APIVersion struct {
-	ID            string    `json:"id,omitempty"`
+	ID            string    `json:"-,omitempty"`
 	Name          string    `json:"name,omitempty"`
 	TransactionID string    `json:"transactionId,omitempty"`
 	CreatedAt     time.Time `json:"createdAt,omitempty"`

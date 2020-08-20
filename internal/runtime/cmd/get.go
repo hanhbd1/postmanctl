@@ -30,6 +30,26 @@ import (
 )
 
 var outputFormat OutputFormatValue
+var outputFile defaultValue
+
+type defaultValue struct {
+	value string
+}
+
+func (o *defaultValue) String() string {
+	return o.value
+}
+
+// Set creates the flag value.
+func (o *defaultValue) Set(v string) error {
+	o.value = v
+	return nil
+}
+
+// Type returns the type of this value.
+func (o *defaultValue) Type() string {
+	return "string"
+}
 
 // OutputFormatValue is a custom Value for the output flag that validates.
 type OutputFormatValue struct {
@@ -148,6 +168,7 @@ func init() {
 	)
 
 	getCmd.PersistentFlags().VarP(&outputFormat, "output", "o", "output format (json, jsonpath, go-template-file)")
+	getCmd.PersistentFlags().VarP(&outputFile, "file", "f", "output file")
 	rootCmd.AddCommand(getCmd)
 }
 
@@ -244,11 +265,13 @@ func getIndividualCollections(args []string) error {
 	uuidmap := prepareMap(resources.CollectionType)
 	for i, name := range args {
 		id, ok := uuidmap[name]
+		var resource *resources.Collection
+		var err error
 		if !ok {
-			handleResponseNoInfoError(resources.CollectionType, name)
+			resource, err = service.Collection(context.Background(), name)
+		} else {
+			resource, err = service.Collection(context.Background(), id)
 		}
-		resource, err := service.Collection(context.Background(), id)
-
 		if err != nil {
 			return handleResponseError(err)
 		}
@@ -263,8 +286,16 @@ func getIndividualCollections(args []string) error {
 
 func getIndividualEnvironments(args []string) error {
 	r := make(resources.EnvironmentSlice, len(args))
-	for i, id := range args {
-		resource, err := service.Environment(context.Background(), id)
+	uuidmap := prepareMap(resources.EnvironmentType)
+	for i, name := range args {
+		id, ok := uuidmap[name]
+		var resource *resources.Environment
+		var err error
+		if !ok {
+			resource, err = service.Environment(context.Background(), name)
+		} else {
+			resource, err = service.Environment(context.Background(), id)
+		}
 
 		if err != nil {
 			return handleResponseError(err)
@@ -280,8 +311,16 @@ func getIndividualEnvironments(args []string) error {
 
 func getIndividualMocks(args []string) error {
 	r := make(resources.MockSlice, len(args))
-	for i, id := range args {
-		resource, err := service.Mock(context.Background(), id)
+	uuidmap := prepareMap(resources.MockType)
+	for i, name := range args {
+		id, ok := uuidmap[name]
+		var resource *resources.Mock
+		var err error
+		if !ok {
+			resource, err = service.Mock(context.Background(), name)
+		} else {
+			resource, err = service.Mock(context.Background(), id)
+		}
 
 		if err != nil {
 			return handleResponseError(err)
@@ -297,8 +336,16 @@ func getIndividualMocks(args []string) error {
 
 func getIndividualMonitors(args []string) error {
 	r := make(resources.MonitorSlice, len(args))
-	for i, id := range args {
-		resource, err := service.Monitor(context.Background(), id)
+	uuidmap := prepareMap(resources.MonitorType)
+	for i, name := range args {
+		id, ok := uuidmap[name]
+		var resource *resources.Monitor
+		var err error
+		if !ok {
+			resource, err = service.Monitor(context.Background(), name)
+		} else {
+			resource, err = service.Monitor(context.Background(), id)
+		}
 
 		if err != nil {
 			return handleResponseError(err)
@@ -314,8 +361,16 @@ func getIndividualMonitors(args []string) error {
 
 func getIndividualAPIs(args []string) error {
 	r := make(resources.APISlice, len(args))
-	for i, id := range args {
-		resource, err := service.API(context.Background(), id)
+	uuidmap := prepareMap(resources.APIType)
+	for i, name := range args {
+		id, ok := uuidmap[name]
+		var resource *resources.API
+		var err error
+		if !ok {
+			resource, err = service.API(context.Background(), name)
+		} else {
+			resource, err = service.API(context.Background(), id)
+		}
 
 		if err != nil {
 			return handleResponseError(err)
@@ -350,8 +405,16 @@ func getIndividualAPIVersions(args []string) error {
 }
 func getIndividualWorkspaces(args []string) error {
 	r := make(resources.WorkspaceSlice, len(args))
-	for i, id := range args {
-		resource, err := service.Workspace(context.Background(), id)
+	uuidmap := prepareMap(resources.WorkspaceType)
+	for i, name := range args {
+		id, ok := uuidmap[name]
+		var resource *resources.Workspace
+		var err error
+		if !ok {
+			resource, err = service.Workspace(context.Background(), name)
+		} else {
+			resource, err = service.Workspace(context.Background(), id)
+		}
 
 		if err != nil {
 			return handleResponseError(err)

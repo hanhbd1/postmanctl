@@ -37,7 +37,7 @@ func (r MockListItems) Format() ([]string, []interface{}) {
 
 // MockListItem represents a mock in a list of all mocks.
 type MockListItem struct {
-	ID          string     `json:"id,omitempty"`
+	ID          string     `json:"-,omitempty"`
 	Owner       string     `json:"owner,omitempty"`
 	UID         string     `json:"uid,omitempty"`
 	Collection  string     `json:"collection,omitempty"`
@@ -55,7 +55,7 @@ type MockResponse struct {
 
 // Mock represents a representation of a mock server from the Postman API.
 type Mock struct {
-	ID          string     `json:"id,omitempty"`
+	ID          string     `json:"-,omitempty"`
 	Owner       string     `json:"owner,omitempty"`
 	UID         string     `json:"uid,omitempty"`
 	Collection  string     `json:"collection,omitempty"`

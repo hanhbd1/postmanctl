@@ -41,7 +41,7 @@ type APIListItem struct {
 	CreatedBy   string    `json:"createdBy,omitempty"`
 	UpdatedBy   string    `json:"updatedBy,omitempty"`
 	Team        string    `json:"team,omitempty"`
-	ID          string    `json:"id,omitempty"`
+	ID          string    `json:"-,omitempty"`
 	Name        string    `json:"name,omitempty"`
 	Summary     string    `json:"summary,omitempty"`
 	Description string    `json:"description,omitempty"`
@@ -59,7 +59,7 @@ type API struct {
 	CreatedBy   string    `json:"createdBy,omitempty"`
 	UpdatedBy   string    `json:"updatedBy,omitempty"`
 	Team        string    `json:"team,omitempty"`
-	ID          string    `json:"id,omitempty"`
+	ID          string    `json:"-,omitempty"`
 	Name        string    `json:"name,omitempty"`
 	Summary     string    `json:"summary,omitempty"`
 	Description string    `json:"description,omitempty"`

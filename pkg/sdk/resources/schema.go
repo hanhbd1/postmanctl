@@ -28,7 +28,7 @@ type Schema struct {
 	APIVersion string    `json:"apiVersion,omitempty"`
 	CreatedBy  string    `json:"createdBy,omitempty"`
 	UpdatedBy  string    `json:"updatedBy,omitempty"`
-	ID         string    `json:"id,omitempty"`
+	ID         string    `json:"-,omitempty"`
 	Type       string    `json:"type,omitempty"`
 	Language   string    `json:"language,omitempty"`
 	CreatedAt  time.Time `json:"createdAt,omitempty"`

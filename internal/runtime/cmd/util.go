@@ -51,13 +51,24 @@ func printGetOutput(r interface{}) {
 	if r == nil {
 		return
 	}
-
+	var list []interface{}
+	b, _ := json.Marshal(r)
+	err := json.Unmarshal(b, &list)
+	if err == nil && len(list) == 1 {
+		r = list[0]
+	}
 	if outputFormat.value == "json" {
 		t, err := json.MarshalIndent(&r, "", "  ")
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %s\n", err)
 		}
-		fmt.Println(string(t))
+		if len(outputFile.value) > 0 {
+			fmt.Printf("write to file %s\n", outputFile.value)
+			ioutil.WriteFile(outputFile.value, t, 0644)
+		} else {
+			fmt.Println(string(t))
+		}
+
 	} else if strings.HasPrefix(outputFormat.value, "jsonpath=") {
 		tmpl := outputFormat.value[9:]
 		j := jsonpath.New("out")
@@ -84,7 +95,13 @@ func printGetOutput(r interface{}) {
 			fmt.Fprintf(os.Stderr, "error: %s\n", err)
 		}
 
-		fmt.Println(buf)
+		if len(outputFile.value) > 0 {
+			fmt.Printf("write to file %s\n", outputFile.value)
+			ioutil.WriteFile(outputFile.value, buf.Bytes(), 0644)
+		} else {
+			fmt.Println(buf)
+		}
+
 	} else if strings.HasPrefix(outputFormat.value, "go-template-file=") {
 		templateFile := outputFormat.value[17:]
 		tmpl, err := ioutil.ReadFile(templateFile)
@@ -116,8 +133,13 @@ func printGetOutput(r interface{}) {
 			fmt.Fprintf(os.Stderr, "error: %s\n", err)
 			os.Exit(1)
 		}
+		if len(outputFile.value) > 0 {
+			fmt.Printf("write to file %s\n", outputFile.value)
+			ioutil.WriteFile(outputFile.value, buf.Bytes(), 0644)
+		} else {
+			fmt.Println(buf.String())
+		}
 
-		fmt.Println(buf.String())
 	} else {
 		var f resources.Formatter = r.(resources.Formatter)
 		printTable(f)

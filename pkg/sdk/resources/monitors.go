@@ -43,7 +43,7 @@ func (r MonitorListItems) Format() ([]string, []interface{}) {
 
 // MonitorListItem represents a single item in an MonitorListResponse.
 type MonitorListItem struct {
-	ID    string `json:"id,omitempty"`
+	ID    string `json:"-,omitempty"`
 	Name  string `json:"name,omitempty"`
 	UID   string `json:"uid,omitempty"`
 	Owner string `json:"owner,omitempty"`
@@ -84,7 +84,7 @@ type MonitorResponse struct {
 // Monitor represents the single monitor response from the
 // Postman API
 type Monitor struct {
-	ID             string         `json:"id,omitempty"`
+	ID             string         `json:"-,omitempty"`
 	Name           string         `json:"name,omitempty"`
 	UID            string         `json:"uid,omitempty"`
 	Owner          string         `json:"owner,omitempty"`
@@ -97,7 +97,7 @@ type Monitor struct {
 }
 
 type monitor struct {
-	ID             string         `json:"id,omitempty"`
+	ID             string         `json:"-,omitempty"`
 	Name           string         `json:"name,omitempty"`
 	UID            string         `json:"uid,omitempty"`
 	Owner          int            `json:"owner,omitempty"`

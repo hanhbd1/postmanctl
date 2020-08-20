@@ -74,6 +74,11 @@ func deleteResource(t resources.ResourceType, resourceID string) error {
 		err error
 	)
 
+	uuid := prepareMap(t)
+	tmpID, ok := uuid[resourceID]
+	if ok {
+		resourceID = tmpID
+	}
 	ctx := context.Background()
 	switch t {
 	case resources.CollectionType:

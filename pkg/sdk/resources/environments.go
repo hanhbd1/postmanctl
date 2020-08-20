@@ -37,7 +37,7 @@ func (r EnvironmentListItems) Format() ([]string, []interface{}) {
 
 // EnvironmentListItem represents a single item in an EnvironmentListResponse.
 type EnvironmentListItem struct {
-	ID    string `json:"id,omitempty"`
+	ID    string `json:"-,omitempty"`
 	Name  string `json:"name,omitempty"`
 	Owner string `json:"owner,omitempty"`
 	UID   string `json:"uid,omitempty"`
@@ -52,7 +52,7 @@ type EnvironmentResponse struct {
 // Environment represents the single environment response from the
 // Postman API
 type Environment struct {
-	ID     string         `json:"id,omitempty"`
+	ID     string         `json:"-,omitempty"`
 	Name   string         `json:"name,omitempty"`
 	Values []KeyValuePair `json:"values,omitempty"`
 }

@@ -30,7 +30,7 @@ type UserResponse struct {
 // User represents the user info associated with a user request in the
 // Postman API.
 type User struct {
-	ID string `json:"id,omitempty"`
+	ID string `json:"-,omitempty"`
 }
 
 // UnmarshalJSON sets the receiver to a copy of data.

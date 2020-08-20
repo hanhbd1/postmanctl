@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/Masterminds/sprig/v3 v3.1.0
+	github.com/a-h/generate v0.0.0-20190312091541-e59c34d33fb3 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/imdario/mergo v0.3.9 // indirect
 	github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de
