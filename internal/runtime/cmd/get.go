@@ -300,7 +300,7 @@ func getIndividualCollections(args []string) error {
 }
 
 func getIndividualEnvironments(args []string) error {
-	r := make(resources.EnvironmentSlice, len(args))
+	r := make([]map[string]interface{}, len(args))
 	uuidmap := prepareMap(resources.EnvironmentType)
 	for i, name := range args {
 		id, ok := uuidmap[name]
@@ -316,7 +316,23 @@ func getIndividualEnvironments(args []string) error {
 			return handleResponseError(err)
 		}
 
-		r[i] = resource
+		if err != nil {
+			return handleResponseError(err)
+		}
+		data, err := json.Marshal(resource)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		var tmp map[string]interface{}
+		err = json.Unmarshal(data, &tmp)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		keymap := make(map[string]int)
+		for _, v := range strings.Split(ignoreKey.value, ",") {
+			keymap[v] = 1
+		}
+		r[i] = util.ReformatMap(tmp, true, keymap)
 	}
 
 	printGetOutput(r)
@@ -325,7 +341,7 @@ func getIndividualEnvironments(args []string) error {
 }
 
 func getIndividualMocks(args []string) error {
-	r := make(resources.MockSlice, len(args))
+	r := make([]map[string]interface{}, len(args))
 	uuidmap := prepareMap(resources.MockType)
 	for i, name := range args {
 		id, ok := uuidmap[name]
@@ -341,7 +357,23 @@ func getIndividualMocks(args []string) error {
 			return handleResponseError(err)
 		}
 
-		r[i] = resource
+		if err != nil {
+			return handleResponseError(err)
+		}
+		data, err := json.Marshal(resource)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		var tmp map[string]interface{}
+		err = json.Unmarshal(data, &tmp)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		keymap := make(map[string]int)
+		for _, v := range strings.Split(ignoreKey.value, ",") {
+			keymap[v] = 1
+		}
+		r[i] = util.ReformatMap(tmp, true, keymap)
 	}
 
 	printGetOutput(r)
@@ -350,7 +382,7 @@ func getIndividualMocks(args []string) error {
 }
 
 func getIndividualMonitors(args []string) error {
-	r := make(resources.MonitorSlice, len(args))
+	r := make([]map[string]interface{}, len(args))
 	uuidmap := prepareMap(resources.MonitorType)
 	for i, name := range args {
 		id, ok := uuidmap[name]
@@ -366,7 +398,23 @@ func getIndividualMonitors(args []string) error {
 			return handleResponseError(err)
 		}
 
-		r[i] = resource
+		if err != nil {
+			return handleResponseError(err)
+		}
+		data, err := json.Marshal(resource)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		var tmp map[string]interface{}
+		err = json.Unmarshal(data, &tmp)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		keymap := make(map[string]int)
+		for _, v := range strings.Split(ignoreKey.value, ",") {
+			keymap[v] = 1
+		}
+		r[i] = util.ReformatMap(tmp, true, keymap)
 	}
 
 	printGetOutput(r)
@@ -375,7 +423,7 @@ func getIndividualMonitors(args []string) error {
 }
 
 func getIndividualAPIs(args []string) error {
-	r := make(resources.APISlice, len(args))
+	r := make([]map[string]interface{}, len(args))
 	uuidmap := prepareMap(resources.APIType)
 	for i, name := range args {
 		id, ok := uuidmap[name]
@@ -391,7 +439,23 @@ func getIndividualAPIs(args []string) error {
 			return handleResponseError(err)
 		}
 
-		r[i] = resource
+		if err != nil {
+			return handleResponseError(err)
+		}
+		data, err := json.Marshal(resource)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		var tmp map[string]interface{}
+		err = json.Unmarshal(data, &tmp)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		keymap := make(map[string]int)
+		for _, v := range strings.Split(ignoreKey.value, ",") {
+			keymap[v] = 1
+		}
+		r[i] = util.ReformatMap(tmp, true, keymap)
 	}
 
 	printGetOutput(r)
@@ -419,7 +483,7 @@ func getIndividualAPIVersions(args []string) error {
 	return nil
 }
 func getIndividualWorkspaces(args []string) error {
-	r := make(resources.WorkspaceSlice, len(args))
+	r := make([]map[string]interface{}, len(args))
 	uuidmap := prepareMap(resources.WorkspaceType)
 	for i, name := range args {
 		id, ok := uuidmap[name]
@@ -435,7 +499,20 @@ func getIndividualWorkspaces(args []string) error {
 			return handleResponseError(err)
 		}
 
-		r[i] = resource
+		data, err := json.Marshal(resource)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		var tmp map[string]interface{}
+		err = json.Unmarshal(data, &tmp)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		keymap := make(map[string]int)
+		for _, v := range strings.Split(ignoreKey.value, ",") {
+			keymap[v] = 1
+		}
+		r[i] = util.ReformatMap(tmp, true, keymap)
 	}
 
 	printGetOutput(r)
