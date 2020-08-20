@@ -2,3 +2,4 @@ output
 dist
 coverage.txt
 .idea
+test.json

@@ -21,6 +21,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/kevinswiber/postmanctl/pkg/util"
 	"github.com/spf13/cast"
 	"os"
 	"strings"
@@ -31,6 +32,7 @@ import (
 
 var outputFormat OutputFormatValue
 var outputFile defaultValue
+var ignoreKey defaultValue
 
 type defaultValue struct {
 	value string
@@ -169,6 +171,7 @@ func init() {
 
 	getCmd.PersistentFlags().VarP(&outputFormat, "output", "o", "output format (json, jsonpath, go-template-file)")
 	getCmd.PersistentFlags().VarP(&outputFile, "file", "f", "output file")
+	getCmd.PersistentFlags().VarP(&ignoreKey, "ignore-key", "i", "ignore json key in response")
 	rootCmd.AddCommand(getCmd)
 }
 
@@ -261,7 +264,7 @@ func getAllResources(resourceType resources.ResourceType, args ...string) error 
 }
 
 func getIndividualCollections(args []string) error {
-	r := make(resources.CollectionSlice, len(args))
+	r := make([]map[string]interface{}, len(args))
 	uuidmap := prepareMap(resources.CollectionType)
 	for i, name := range args {
 		id, ok := uuidmap[name]
@@ -275,8 +278,20 @@ func getIndividualCollections(args []string) error {
 		if err != nil {
 			return handleResponseError(err)
 		}
-
-		r[i] = resource
+		data, err := json.Marshal(resource)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		var tmp map[string]interface{}
+		err = json.Unmarshal(data, &tmp)
+		if err != nil {
+			return handleResponseError(err)
+		}
+		keymap := make(map[string]int)
+		for _, v := range strings.Split(ignoreKey.value, ",") {
+			keymap[v] = 1
+		}
+		r[i] = util.ReformatMap(tmp, true, keymap)
 	}
 
 	printGetOutput(r)
