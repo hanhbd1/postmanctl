@@ -153,7 +153,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "collection"
 
 		c := struct {
-			Collection map[string]interface{} `json:"collection,omitempty"`
+			Collection map[string]interface{} `json:"collection"`
 		}{
 			Collection: v,
 		}
@@ -163,7 +163,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "environment"
 
 		c := struct {
-			Environment map[string]interface{} `json:"environment,omitempty"`
+			Environment map[string]interface{} `json:"environment"`
 		}{
 			Environment: v,
 		}
@@ -173,7 +173,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "mock"
 
 		c := struct {
-			Mock map[string]interface{} `json:"mock,omitempty"`
+			Mock map[string]interface{} `json:"mock"`
 		}{
 			Mock: v,
 		}
@@ -183,7 +183,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "monitor"
 
 		c := struct {
-			Monitor map[string]interface{} `json:"monitor,omitempty"`
+			Monitor map[string]interface{} `json:"monitor"`
 		}{
 			Monitor: v,
 		}
@@ -193,7 +193,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "workspace"
 
 		c := struct {
-			Workspace map[string]interface{} `json:"workspace,omitempty"`
+			Workspace map[string]interface{} `json:"workspace"`
 		}{
 			Workspace: v,
 		}
@@ -203,7 +203,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "api"
 
 		c := struct {
-			API map[string]interface{} `json:"api,omitempty"`
+			API map[string]interface{} `json:"api"`
 		}{
 			API: v,
 		}
@@ -213,7 +213,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "version"
 
 		c := struct {
-			Version map[string]interface{} `json:"version,omitempty"`
+			Version map[string]interface{} `json:"version"`
 		}{
 			Version: v,
 		}
@@ -223,7 +223,7 @@ func (s *Service) CreateFromReader(ctx context.Context, t resources.ResourceType
 		responseValueKey = "schema"
 
 		c := struct {
-			Schema map[string]interface{} `json:"schema,omitempty"`
+			Schema map[string]interface{} `json:"schema"`
 		}{
 			Schema: v,
 		}

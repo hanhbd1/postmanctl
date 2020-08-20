@@ -20,7 +20,7 @@ import "time"
 
 // APIListResponse represents the top-level APIs response from the Postman API.
 type APIListResponse struct {
-	APIs APIListItems `json:"apis,omitempty"`
+	APIs APIListItems `json:"apis"`
 }
 
 // APIListItems is a slice of APIListItem
@@ -38,33 +38,33 @@ func (r APIListItems) Format() ([]string, []interface{}) {
 
 // APIListItem represents a single item in an APIListResponse.
 type APIListItem struct {
-	CreatedBy   string    `json:"createdBy,omitempty"`
-	UpdatedBy   string    `json:"updatedBy,omitempty"`
-	Team        string    `json:"team,omitempty"`
-	ID          string    `json:"-,omitempty"`
-	Name        string    `json:"name,omitempty"`
-	Summary     string    `json:"summary,omitempty"`
-	Description string    `json:"description,omitempty"`
-	CreatedAt   time.Time `json:"createdAt,omitempty"`
-	UpdatedAt   time.Time `json:"updatedAt,omitempty"`
+	CreatedBy   string    `json:"createdBy"`
+	UpdatedBy   string    `json:"updatedBy"`
+	Team        string    `json:"team"`
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	Summary     string    `json:"summary"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
 }
 
 // APIResponse is a single API representation in the Postman API.
 type APIResponse struct {
-	API API `json:"api,omitempty"`
+	API API `json:"api"`
 }
 
 // API represents a single item in an APIListResponse.
 type API struct {
-	CreatedBy   string    `json:"createdBy,omitempty"`
-	UpdatedBy   string    `json:"updatedBy,omitempty"`
-	Team        string    `json:"team,omitempty"`
-	ID          string    `json:"-,omitempty"`
-	Name        string    `json:"name,omitempty"`
-	Summary     string    `json:"summary,omitempty"`
-	Description string    `json:"description,omitempty"`
-	CreatedAt   time.Time `json:"createdAt,omitempty"`
-	UpdatedAt   time.Time `json:"updatedAt,omitempty"`
+	CreatedBy   string    `json:"createdBy"`
+	UpdatedBy   string    `json:"updatedBy"`
+	Team        string    `json:"team"`
+	ID          string    `json:"id"`
+	Name        string    `json:"name"`
+	Summary     string    `json:"summary"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
 }
 
 // Format returns column headers and values for the resource.

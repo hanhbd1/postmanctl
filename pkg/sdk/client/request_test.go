@@ -300,7 +300,7 @@ func TestInto(t *testing.T) {
 	defer server.Close()
 
 	type subj struct {
-		Hello string `json:"hello,omitempty"`
+		Hello string `json:"hello"`
 	}
 
 	subject := `{"hello":"world"}`
@@ -470,7 +470,7 @@ func TestResponseBodyReadErrorOn200StatusCode(t *testing.T) {
 	defer server.Close()
 
 	type subj struct {
-		Hello string `json:"hello,omitempty"`
+		Hello string `json:"hello"`
 	}
 
 	c := &http.Client{
@@ -504,7 +504,7 @@ func TestUnmarshalErrorOn200StatusCode(t *testing.T) {
 	defer server.Close()
 
 	type subj struct {
-		Hello string `json:"hello,omitempty"`
+		Hello string `json:"hello"`
 	}
 
 	subject := `{"hello":}`
@@ -538,7 +538,7 @@ func TestUnmarshalErrorOnNon200StatusCode(t *testing.T) {
 	defer server.Close()
 
 	type subj struct {
-		Hello string `json:"hello,omitempty"`
+		Hello string `json:"hello"`
 	}
 
 	subject := `{"hello":}`

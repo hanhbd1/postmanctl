@@ -25,7 +25,7 @@ import (
 // MonitorListResponse represents the top-level monitors response from the
 // Postman API.
 type MonitorListResponse struct {
-	Monitors MonitorListItems `json:"monitors,omitempty"`
+	Monitors MonitorListItems `json:"monitors"`
 }
 
 // MonitorListItems is a slice of MonitorListItem.
@@ -43,10 +43,10 @@ func (r MonitorListItems) Format() ([]string, []interface{}) {
 
 // MonitorListItem represents a single item in an MonitorListResponse.
 type MonitorListItem struct {
-	ID    string `json:"-,omitempty"`
-	Name  string `json:"name,omitempty"`
-	UID   string `json:"uid,omitempty"`
-	Owner string `json:"owner,omitempty"`
+	ID    string `json:"id"`
+	Name  string `json:"name"`
+	UID   string `json:"uid"`
+	Owner string `json:"owner"`
 }
 
 // UnmarshalJSON sets the receiver to a copy of data.
@@ -78,35 +78,35 @@ func (m *MonitorListItem) UnmarshalJSON(data []byte) error {
 // MonitorResponse is the top-level monitor response from the
 // Postman API.
 type MonitorResponse struct {
-	Monitor Monitor `json:"monitor,omitempty"`
+	Monitor Monitor `json:"monitor"`
 }
 
 // Monitor represents the single monitor response from the
 // Postman API
 type Monitor struct {
-	ID             string         `json:"-,omitempty"`
-	Name           string         `json:"name,omitempty"`
-	UID            string         `json:"uid,omitempty"`
-	Owner          string         `json:"owner,omitempty"`
-	CollectionUID  string         `json:"collectionUid,omitempty"`
-	EnvironmentUID string         `json:"environmentUid,omitempty"`
-	Options        MonitorOptions `json:"options,omitempty"`
-	Notifications  Notifications  `json:"notifications,omitempty"`
-	Distribution   []interface{}  `json:"distribution,omitempty"`
-	Schedule       Schedule       `json:"schedule,omitempty"`
+	ID             string         `json:"id"`
+	Name           string         `json:"name"`
+	UID            string         `json:"uid"`
+	Owner          string         `json:"owner"`
+	CollectionUID  string         `json:"collectionUid"`
+	EnvironmentUID string         `json:"environmentUid"`
+	Options        MonitorOptions `json:"options"`
+	Notifications  Notifications  `json:"notifications"`
+	Distribution   []interface{}  `json:"distribution"`
+	Schedule       Schedule       `json:"schedule"`
 }
 
 type monitor struct {
-	ID             string         `json:"-,omitempty"`
-	Name           string         `json:"name,omitempty"`
-	UID            string         `json:"uid,omitempty"`
-	Owner          int            `json:"owner,omitempty"`
-	CollectionUID  string         `json:"collectionUid,omitempty"`
-	EnvironmentUID string         `json:"environmentUid,omitempty"`
-	Options        MonitorOptions `json:"options,omitempty"`
-	Notifications  Notifications  `json:"notifications,omitempty"`
-	Distribution   []interface{}  `json:"distribution,omitempty"`
-	Schedule       Schedule       `json:"schedule,omitempty"`
+	ID             string         `json:"id"`
+	Name           string         `json:"name"`
+	UID            string         `json:"uid"`
+	Owner          int            `json:"owner"`
+	CollectionUID  string         `json:"collectionUid"`
+	EnvironmentUID string         `json:"environmentUid"`
+	Options        MonitorOptions `json:"options"`
+	Notifications  Notifications  `json:"notifications"`
+	Distribution   []interface{}  `json:"distribution"`
+	Schedule       Schedule       `json:"schedule"`
 }
 
 // Format returns column headers and values for the resource.
@@ -153,31 +153,31 @@ func (r MonitorSlice) Format() ([]string, []interface{}) {
 
 // MonitorOptions list options for a monitor.
 type MonitorOptions struct {
-	StrictSSL       bool `json:"strictSSL,omitempty"`
-	FollowRedirects bool `json:"followRedirects,omitempty"`
-	RequestTimeout  *int `json:"requestTimeout,omitempty"`
-	RequestDelay    int  `json:"requestDelay,omitempty"`
+	StrictSSL       bool `json:"strictSSL"`
+	FollowRedirects bool `json:"followRedirects"`
+	RequestTimeout  *int `json:"requestTimeout"`
+	RequestDelay    int  `json:"requestDelay"`
 }
 
 // OnError represents a communication mechanism for errors.
 type OnError struct {
-	Email string `json:"email,omitempty"`
+	Email string `json:"email"`
 }
 
 // OnFailure represents a communication mechanism for failures.
 type OnFailure struct {
-	Email string `json:"email,omitempty"`
+	Email string `json:"email"`
 }
 
 // Notifications represents a communication structure for notifications.
 type Notifications struct {
-	OnError   []OnError   `json:"onError,omitempty"`
-	OnFailure []OnFailure `json:"onFailure,omitempty"`
+	OnError   []OnError   `json:"onError"`
+	OnFailure []OnFailure `json:"onFailure"`
 }
 
 // Schedule represents when the monitor is scheduled to run.
 type Schedule struct {
-	Cron     string    `json:"cron,omitempty"`
-	Timezone string    `json:"timezone,omitempty"`
-	NextRun  time.Time `json:"nextRun,omitempty"`
+	Cron     string    `json:"cron"`
+	Timezone string    `json:"timezone"`
+	NextRun  time.Time `json:"nextRun"`
 }

@@ -131,7 +131,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "collection"
 
 		c := struct {
-			Collection map[string]interface{} `json:"collection,omitempty"`
+			Collection map[string]interface{} `json:"collection"`
 		}{
 			Collection: v,
 		}
@@ -141,7 +141,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "environment"
 
 		c := struct {
-			Environment map[string]interface{} `json:"environment,omitempty"`
+			Environment map[string]interface{} `json:"environment"`
 		}{
 			Environment: v,
 		}
@@ -151,7 +151,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "mock"
 
 		c := struct {
-			Mock map[string]interface{} `json:"mock,omitempty"`
+			Mock map[string]interface{} `json:"mock"`
 		}{
 			Mock: v,
 		}
@@ -161,7 +161,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "monitor"
 
 		c := struct {
-			Monitor map[string]interface{} `json:"monitor,omitempty"`
+			Monitor map[string]interface{} `json:"monitor"`
 		}{
 			Monitor: v,
 		}
@@ -171,7 +171,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "workspace"
 
 		c := struct {
-			Workspace map[string]interface{} `json:"workspace,omitempty"`
+			Workspace map[string]interface{} `json:"workspace"`
 		}{
 			Workspace: v,
 		}
@@ -181,7 +181,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "api"
 
 		c := struct {
-			API map[string]interface{} `json:"api,omitempty"`
+			API map[string]interface{} `json:"api"`
 		}{
 			API: v,
 		}
@@ -191,7 +191,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "version"
 
 		c := struct {
-			Version map[string]interface{} `json:"version,omitempty"`
+			Version map[string]interface{} `json:"version"`
 		}{
 			Version: v,
 		}
@@ -201,7 +201,7 @@ func (s *Service) ReplaceFromReader(ctx context.Context, t resources.ResourceTyp
 		responseValueKey = "schema"
 
 		c := struct {
-			Schema map[string]interface{} `json:"schema,omitempty"`
+			Schema map[string]interface{} `json:"schema"`
 		}{
 			Schema: v,
 		}

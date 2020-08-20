@@ -18,12 +18,12 @@ package config
 
 // Config is a struct representation of a postmanctl config file.
 type Config struct {
-	CurrentContext string             `mapstructure:"currentContext,omitempty"`
-	Contexts       map[string]Context `mapstructure:"contexts,omitempty"`
+	CurrentContext string             `mapstructure:"currentContext"`
+	Contexts       map[string]Context `mapstructure:"contexts"`
 }
 
 // Context models the current Postman API context as a struct.
 type Context struct {
-	APIKey  string `mapstructure:"apiKey,omitempty"`
-	APIRoot string `mapstructure:"apiRoot,omitempty"`
+	APIKey  string `mapstructure:"apiKey"`
+	APIRoot string `mapstructure:"apiRoot"`
 }

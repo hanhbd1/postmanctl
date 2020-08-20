@@ -116,7 +116,7 @@ func (r FormattedAPIRelationItems) Format() ([]string, []interface{}) {
 
 // APIRelationsResource provides the top-level wrapper for API Relations.
 type APIRelationsResource struct {
-	Relations APIRelations `json:"relations,omitempty"`
+	Relations APIRelations `json:"relations"`
 }
 
 // APIRelations provides the top-level relations representation for APIs.
@@ -132,33 +132,33 @@ type APIRelations struct {
 
 // LinkedCollection describes a single linked collection representation.
 type LinkedCollection struct {
-	ID        string    `json:"-,omitempty"`
-	Name      string    `json:"name,omitempty"`
-	CreatedAt time.Time `json:"createdAt,omitempty"`
-	UpdatedAt time.Time `json:"updatedAt,omitempty"`
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 // LinkedEnvironment describes a single linked collection representation.
 type LinkedEnvironment struct {
-	ID        string    `json:"-,omitempty"`
-	Name      string    `json:"name,omitempty"`
-	CreatedAt time.Time `json:"createdAt,omitempty"`
-	UpdatedAt time.Time `json:"updatedAt,omitempty"`
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 // LinkedMock describes a single linked collection representation.
 type LinkedMock struct {
-	ID        string    `json:"-,omitempty"`
-	Name      string    `json:"name,omitempty"`
-	CreatedAt time.Time `json:"createdAt,omitempty"`
-	UpdatedAt time.Time `json:"updatedAt,omitempty"`
-	URL       string    `json:"url,omitempty"`
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	URL       string    `json:"url"`
 }
 
 // LinkedMonitor describes a single linked collection representation.
 type LinkedMonitor struct {
-	ID        string    `json:"-,omitempty"`
-	Name      string    `json:"name,omitempty"`
-	CreatedAt time.Time `json:"createdAt,omitempty"`
-	UpdatedAt time.Time `json:"updatedAt,omitempty"`
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
