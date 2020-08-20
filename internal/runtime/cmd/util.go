@@ -63,7 +63,6 @@ func printGetOutput(r interface{}) {
 		} else {
 			fmt.Println(string(t))
 		}
-
 	} else if strings.HasPrefix(outputFormat.value, "jsonpath=") {
 		tmpl := outputFormat.value[9:]
 		j := jsonpath.New("out")
@@ -134,7 +133,6 @@ func printGetOutput(r interface{}) {
 		} else {
 			fmt.Println(buf.String())
 		}
-
 	} else {
 		var f resources.Formatter = r.(resources.Formatter)
 		printTable(f)

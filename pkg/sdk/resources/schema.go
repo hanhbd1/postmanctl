@@ -20,20 +20,20 @@ import "time"
 
 // SchemaResponse represents the top-level schema response in the Postman API.
 type SchemaResponse struct {
-	Schema Schema `json:"schema,omitempty"`
+	Schema Schema `json:"schema"`
 }
 
 // Schema represents an API schema from the Postman API
 type Schema struct {
-	APIVersion string    `json:"apiVersion,omitempty"`
-	CreatedBy  string    `json:"createdBy,omitempty"`
-	UpdatedBy  string    `json:"updatedBy,omitempty"`
-	ID         string    `json:"id,omitempty"`
-	Type       string    `json:"type,omitempty"`
-	Language   string    `json:"language,omitempty"`
-	CreatedAt  time.Time `json:"createdAt,omitempty"`
-	UpdatedAt  time.Time `json:"updatedAt,omitempty"`
-	Schema     string    `json:"schema,omitempty"`
+	APIVersion string    `json:"apiVersion"`
+	CreatedBy  string    `json:"createdBy"`
+	UpdatedBy  string    `json:"updatedBy"`
+	ID         string    `json:"id"`
+	Type       string    `json:"type"`
+	Language   string    `json:"language"`
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
+	Schema     string    `json:"schema"`
 }
 
 // Format returns column headers and values for the resource.

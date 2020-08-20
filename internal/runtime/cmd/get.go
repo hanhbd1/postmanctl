@@ -33,6 +33,7 @@ import (
 var outputFormat OutputFormatValue
 var outputFile defaultValue
 var ignoreKey defaultValue
+var removeNil defaultValue
 
 type defaultValue struct {
 	value string
