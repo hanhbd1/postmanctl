@@ -35,30 +35,12 @@ Use "postmanctl [command] --help" for more information about a command.
 
 ## Install
 
-### Download binary
-
-Binaries for Windows, MacOS, and Linux can be downloaded from the GitHub releases page: https://github.com/kevinswiber/postmanctl/releases.
-
-### Homebrew
-
-Homebrew users can install `postmanctl` from the `kevinswiber/postmanctl` tap:
-
-```
-$ brew install kevinswiber/postmanctl/postmanctl
-```
-
-### Using `go get`
-
-```
-$ go get -u github.com/kevinswiber/postmanctl/cmd/postmanctl
-```
-
 ### From source:
 
 Download and install from source.
 
 ```
-$ git clone https://github.com/kevinswiber/postmanctl.git && make install
+$ git clone https://github.com/hanhbd1/postmanctl.git && make install
 ```
 
 ## Getting started
@@ -82,12 +64,12 @@ config file written to $HOME/.postmanctl.yaml
 ```
 
 You're now ready to start using `postmanctl`!
-
-### Fetching a list of Postman collections
-
+### Common Usecase
 Now that access to the Postman API has been configured, you can start playing around with different commands.
 
-Fetch a list of Postman collections.
+#### Fetching a list of Postman collections
+
+Fetch a list of Postman collections metadata.
 
 ```
 $ postmanctl get collections
@@ -97,7 +79,56 @@ UID                                             NAME
 10354132-e02524dc-54d5-49d7-9ef8-121209316083   Demo API
 ```
 
-### Get more information about a collection
+#### Export a collection 
+
+Export a Postman collection with collection name `auth-service` to file `test.json`, 
+remove keys `id`,`_postman_id` in response (to avoid conflict)
+```
+$ postmanctl get collection auth-service -o json -f test.json -i id,_postman_id
+```
+
+Export a Postman collection with collection UID `10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860` to file `test.json`, 
+remove keys `id`,`_postman_id` in response (to avoid conflict)
+```
+$ postmanctl get collection 10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860 -o json -f test.json -i id,_postman_id
+```
+
+#### Export a environment 
+
+Export a Postman environment with environment name `auth-service.dev` to file `test.json`, 
+remove keys `id`,`_postman_id` in response (to avoid conflict)
+```
+$ postmanctl get environment auth-service.dev -o json -f test.json -i id,_postman_id
+```
+
+Export a Postman environment with environment UID `10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860` to file `test.json`, 
+remove keys `id`,`_postman_id` in response (to avoid conflict)
+```
+$ postmanctl get environment 10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860 -o json -f test.json -i id,_postman_id
+```
+
+#### Replace a collection 
+
+Replace a Postman collection with collection name `auth-service` by data in file `test.json`
+```
+$ postmanctl replace collection auth-service -f test.json
+```
+
+Export a Postman collection with collection UID `10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860` by data in file `test.json`
+```
+$ postmanctl replace collection 10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860 -f test.json
+```
+
+
+#### Create a collection 
+
+Create a Postman collection by data in file `test.json`
+```
+$ postmanctl create collection -f test.json
+```
+*Note* : collection name will be define in `test.json`
+
+#### Get more information about a collection
 
 ```
 $ postmanctl describe collection 10354132-e02524dc-54d5-49d7-9ef8-121209316083
@@ -116,7 +147,7 @@ Items:
       └── Create Weather Forecast (scripts: prerequest,test)
 ```
 
-### Create a mock server
+#### Create a mock server
 
 You can create resources by piping in a JSON object describing that resource or by passing in a file with the `--filename` flag.
 
@@ -140,7 +171,7 @@ You can check the new resource by running:
 $ postmanctl describe mock 10354132-588394be-63e5-4194-828c-4439fee85ca8
 ```
 
-### Using a custom JSONPath output to filter results
+#### Using a custom JSONPath output to filter results
 
 Now that we have a mock server, let's run a command to get its public URL.
 
