@@ -18,13 +18,21 @@ package cmd
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/kevinswiber/postmanctl/pkg/util"
+	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/kevinswiber/postmanctl/pkg/sdk/resources"
 	"github.com/spf13/cobra"
 )
+
+var mode string
+
+var diffFile defaultValue
 
 func init() {
 	replaceCmd := &cobra.Command{
@@ -44,6 +52,10 @@ func init() {
 		},
 	}
 	replaceCmd.PersistentFlags().StringVarP(&inputFile, "filename", "f", "", "the filename used to replace the resource (required when not using data from stdin)")
+	replaceCmd.PersistentFlags().StringVarP(&mode, "mode", "m", "force", "force/compare -> force replace or compare before replace")
+	//replaceCmd.PersistentFlags().StringVarP(&diffFile, "diff", "df", "", "the file diff report. Default diff report will print to console")
+	replaceCmd.PersistentFlags().VarP(&ignoreKey, "ignore-key", "i", "ignore json key in response")
+	replaceCmd.PersistentFlags().VarP(&diffFile, "diff-file", "d", "ignore json key in response")
 
 	replaceCmd.AddCommand(
 		generateReplaceSubcommand(resources.CollectionType, "collection", []string{"co"}),
@@ -104,7 +116,21 @@ func replaceResource(t resources.ResourceType, resourceID string) error {
 	if ok {
 		resourceID = tmpID
 	}
-	
+	switch mode {
+	case "force":
+	case "compare":
+		if len(inputFile) == 0 {
+			fmt.Fprintf(os.Stderr, "compare mode only work with file")
+			return nil
+		}
+		if !doCompare(inputFile, resourceID, t) {
+			return nil
+		}
+	default:
+		fmt.Fprintf(os.Stderr, "wrong mode %s, mode must be force or compare\n", mode)
+		return nil
+	}
+
 	ctx := context.Background()
 	switch t {
 	case resources.CollectionType:
@@ -133,4 +159,73 @@ func replaceResource(t resources.ResourceType, resourceID string) error {
 	fmt.Println(id)
 
 	return nil
+}
+
+func doCompare(file string, resourceID string, t resources.ResourceType) bool {
+	r, err := os.Open(file)
+
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err.Error())
+		return false
+	}
+	defer r.Close()
+	var data interface{}
+	ctx := context.Background()
+	switch t {
+	case resources.CollectionType:
+		data, err = service.Collection(ctx, resourceID)
+	case resources.EnvironmentType:
+		data, err = service.Environment(ctx, resourceID)
+	case resources.MockType:
+		data, err = service.Mock(ctx, resourceID)
+	case resources.MonitorType:
+		data, err = service.Monitor(ctx, resourceID)
+	case resources.WorkspaceType:
+		data, err = service.Workspace(ctx, resourceID)
+	default:
+		fmt.Fprintln(os.Stderr, "no supported type")
+		return true
+	}
+	btmp, err := json.Marshal(data)
+	if err != nil {
+		return false
+	}
+	var tmp map[string]interface{}
+	err = json.Unmarshal(btmp, &tmp)
+	if err != nil {
+		return false
+	}
+	keymap := make(map[string]int)
+	for _, v := range strings.Split(ignoreKey.value, ",") {
+		keymap[v] = 1
+	}
+	tmp = util.ReformatMap(tmp, true, keymap)
+	b, err := ioutil.ReadAll(r)
+
+	if err != nil {
+		return false
+	}
+
+	var v map[string]interface{}
+	if err := json.Unmarshal(b, &v); err != nil {
+		return false
+	}
+	dff := util.CompareMap("", tmp, v)
+	tt, _ := json.MarshalIndent(dff, "", "  ")
+	if len(diffFile.value) > 0 {
+		fmt.Printf("Write diff report to file %s\n", diffFile.value)
+		ioutil.WriteFile(diffFile.value, tt, 0644)
+	} else {
+		fmt.Println("Diff report:")
+		fmt.Println(string(tt))
+	}
+	fmt.Println("Please check carefully before confirm replace.")
+	var confirm string
+	fmt.Printf("Are you sure to merge(Y/N):")
+	fmt.Scanln(&confirm)
+	if strings.ToLower(confirm) == "y" {
+		return true
+	}
+	fmt.Printf("Cancel!\n")
+	return false
 }
