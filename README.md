@@ -109,16 +109,21 @@ $ postmanctl get environment 10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860 -o js
 
 #### Replace a collection 
 
-Replace a Postman collection with collection name `auth-service` by data in file `test.json`
+Force replace a Postman collection with collection name `auth-service` by data in file `test.json`
 ```
 $ postmanctl replace collection auth-service -f test.json
 ```
 
-Export a Postman collection with collection UID `10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860` by data in file `test.json`
+Force replace a Postman collection with collection UID `10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860` by data in file `test.json`
 ```
 $ postmanctl replace collection 10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860 -f test.json
 ```
 
+Replace Postman collection with diff report and confirm before replace
+
+```
+$ postmanctl replace collection auth-service -f test.json -d diff.json -m compare -i id,_postman_id
+```
 
 #### Create a collection 
 
