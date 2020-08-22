@@ -210,6 +210,7 @@ func doCompare(file string, resourceID string, t resources.ResourceType) bool {
 	if err := json.Unmarshal(b, &v); err != nil {
 		return false
 	}
+	v = util.ReformatMap(v, true, keymap)
 	dff := util.CompareMap("", tmp, v)
 	tt, _ := json.MarshalIndent(dff, "", "  ")
 	if len(diffFile.value) > 0 {
