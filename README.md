@@ -119,7 +119,7 @@ Force replace a Postman collection with collection UID `10354132-0a428e3b-4112-4
 $ postmanctl replace collection 10354132-0a428e3b-4112-46ee-b57a-d2f3e1b7c860 -f test.json
 ```
 
-Replace Postman collection with diff report and confirm before replace
+Replace Postman collection with diff report and confirm before replace. Not Work yet.
 
 ```
 $ postmanctl replace collection auth-service -f test.json -d diff.json -m compare -i id,_postman_id
