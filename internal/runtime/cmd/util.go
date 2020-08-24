@@ -53,7 +53,7 @@ func printGetOutput(r interface{}) {
 		r = list[0]
 	}
 	if outputFormat.value == "json" {
-		t, err := json.MarshalIndent(&r, "", "  ")
+		t, err := json.MarshalIndent(&r, "", " \t")
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error: %s\n", err)
 		}

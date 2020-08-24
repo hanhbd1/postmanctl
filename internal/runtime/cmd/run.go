@@ -42,7 +42,7 @@ func init() {
 				os.Exit(1)
 			}
 
-			b, err := json.MarshalIndent(&msg, "", "  ")
+			b, err := json.MarshalIndent(&msg, "", " \t")
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "error: %s\n", err)
 				os.Exit(1)

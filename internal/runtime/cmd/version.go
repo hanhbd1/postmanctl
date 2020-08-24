@@ -81,7 +81,7 @@ func init() {
 				fmt.Printf("Commit: %s\n", v.Commit)
 				fmt.Printf("Date: %s\n", v.Date)
 			} else if f == "json" {
-				p, err := json.MarshalIndent(&v, "", "  ")
+				p, err := json.MarshalIndent(&v, "", "\t")
 
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "error: %s\n", err)

@@ -24,6 +24,7 @@ import (
 	"github.com/kevinswiber/postmanctl/pkg/util"
 	"io/ioutil"
 	"os"
+	"reflect"
 	"strings"
 
 	"github.com/kevinswiber/postmanctl/pkg/sdk/resources"
@@ -176,12 +177,6 @@ func doCompare(file string, resourceID string, t resources.ResourceType) bool {
 		data, err = service.Collection(ctx, resourceID)
 	case resources.EnvironmentType:
 		data, err = service.Environment(ctx, resourceID)
-	case resources.MockType:
-		data, err = service.Mock(ctx, resourceID)
-	case resources.MonitorType:
-		data, err = service.Monitor(ctx, resourceID)
-	case resources.WorkspaceType:
-		data, err = service.Workspace(ctx, resourceID)
 	default:
 		fmt.Fprintln(os.Stderr, "no supported type")
 		return true
@@ -211,8 +206,18 @@ func doCompare(file string, resourceID string, t resources.ResourceType) bool {
 		return false
 	}
 	v = util.ReformatMap(v, true, keymap)
-	dff := util.CompareMap("", tmp, v)
-	tt, _ := json.MarshalIndent(dff, "", "  ")
+	var tt []byte
+	switch t {
+	case resources.CollectionType:
+		var old, new *resources.Collection
+		ob, _ := json.Marshal(tmp)
+		nb, _ := json.Marshal(v)
+		json.Unmarshal(ob, &old)
+		json.Unmarshal(nb, &new)
+		tt = compareCollection(old, new)
+	case resources.EnvironmentType:
+		data, err = service.Environment(ctx, resourceID)
+	}
 	if len(diffFile.value) > 0 {
 		fmt.Printf("Write diff report to file %s\n", diffFile.value)
 		ioutil.WriteFile(diffFile.value, tt, 0644)
@@ -229,4 +234,35 @@ func doCompare(file string, resourceID string, t resources.ResourceType) bool {
 	}
 	fmt.Printf("Cancel!\n")
 	return false
+}
+
+func compareCollection(old *resources.Collection, new *resources.Collection) []byte {
+	buff := strings.Builder{}
+	if !reflect.DeepEqual(old.Info, new.Info) {
+		buff.WriteString("Diff in info:\n")
+		tmp, _ := json.MarshalIndent(old.Info, "", " \t")
+		buff.Write(tmp)
+		buff.WriteString("\n")
+		tmp, _ = json.MarshalIndent(new.Info, "", " \t")
+		buff.Write(tmp)
+		buff.WriteString("\n")
+	}
+	mapOld := make(map[string]bool)
+	for _, v := range old.Item {
+		s := v.(map[string]interface{})
+		if _, ok := s["name"]; ok {
+			mapOld[s["name"].(string)] = true
+		}
+	}
+	mapNew := make(map[string]bool)
+	for _, v := range new.Item {
+		s := v.(map[string]interface{})
+		if _, ok := s["name"]; ok {
+			mapNew[s["name"].(string)] = true
+		}
+	}
+
+	//for k,
+
+	return nil
 }
